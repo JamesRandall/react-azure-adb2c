@@ -101,7 +101,7 @@ const authentication = {
       }
     };
   },
-  signout: () => window.msal.logout()
+  signOut: () => window.msal.logout()
 }
 
 export default authentication;
