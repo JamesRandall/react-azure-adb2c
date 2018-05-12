@@ -76,7 +76,7 @@ If you want to set things up so that a user is authenticated as they visit a par
 
 Simply call the method _getAccessToken_:
 
-    import authentication from 'react-azure-ad-b2c'
+    import authentication from 'react-azure-adb2c'
 
     // ...
 
@@ -86,7 +86,7 @@ Simply call the method _getAccessToken_:
 
 To sign out:
 
-    import authentication from 'react-azure-ad-b2c'
+    import authentication from 'react-azure-adb2c'
 
     // ...
 
