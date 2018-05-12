@@ -72,6 +72,16 @@ If you want to set things up so that a user is authenticated as they visit a par
       }
     }
 
+## Getting the Access Token
+
+Simply call the method _getAccessToken_:
+
+    import authentication from 'react-azure-ad-b2c'
+
+    // ...
+
+    const token = authentication.getAccessToken();
+
 ## Signing Out
 
 To sign out:

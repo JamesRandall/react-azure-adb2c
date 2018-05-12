@@ -101,7 +101,8 @@ const authentication = {
       }
     };
   },
-  signOut: () => window.msal.logout()
+  signOut: () => window.msal.logout(),
+  getAccessToken: () => state.accessToken
 }
 
 export default authentication;
