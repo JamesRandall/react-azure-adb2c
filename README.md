@@ -12,17 +12,17 @@ PRs welcome!
 
 If you are using npm:
 
-    npm install react-azure-ad-b2c --save
+    npm install react-azure-adb2c --save
 
 Or if you are using yarn:
 
-    yarn add react-azure-ad-b2c
+    yarn add react-azure-adb2c
 
 ## Initializing the Library
 
 You'll first need to load the module and pass some configuration to the library. Normally this would go in your index.js file:
 
-    import authentication from 'react-azure-ad-b2c';
+    import authentication from 'react-azure-adb2c';
     authentication.initialize({
         // optional, will default to this
         instance: 'https://login.microsoftonline.com/tfp/', 
@@ -54,7 +54,7 @@ If you want to set things up so that a user is authenticated as soon as they hit
 If you want to set things up so that a user is authenticated as they visit a part of the application that requires authentication then the appropriate components can be wrapped inside higher order components that will handle the authentication process. This is done using the _authentication.required_ function, normally in conjunction with a router. The example below shows this using the popular react-router:
 
     import React, { Component } from 'react';
-    import authentication from 'react-azure-ad-b2c'
+    import authentication from 'react-azure-adb2c'
     import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
     import HomePage from './Homepage'
     import MembersArea from './MembersArea'

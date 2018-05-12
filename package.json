@@ -1,15 +1,15 @@
 {
-  "name": "react-azure-ad-b2c",
+  "name": "react-azure-adb2c",
   "version": "0.1.0",
   "description": "Authentication library for Azure AD B2C and ReactJS",
-  "main": "lib/react-azure-ad-b2c.js",
+  "main": "lib/react-azure-adb2c.js",
   "scripts": {
     "compile": "cross-env NODE_ENV=production babel src --out-dir lib",
     "prepublish": "npm run compile"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jamesrandall/react-azure-ad-b2c.git"
+    "url": "git+https://github.com/jamesrandall/react-azure-adb2c.git"
   },
   "keywords": [
     "react",
@@ -22,9 +22,9 @@
   "author": "James Randall",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JamesRandall/react-azure-ad-b2c/issues"
+    "url": "https://github.com/JamesRandall/react-azure-adb2c/issues"
   },
-  "homepage": "https://github.com/JamesRandall/react-azure-ad-b2c#readme",
+  "homepage": "https://github.com/JamesRandall/react-azure-adb2c#readme",
   "dependencies": {
     "msal": "^0.1.5"
   },
