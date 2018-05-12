@@ -35,4 +35,4 @@ If you want to set things up so that a user is authenticated as soon as they hit
 
 ## Thanks
 
-To build this I made use of the B2C site, the [https://github.com/AzureAD/microsoft-authentication-library-for-js](MSAL library docs), 
+To build this I made use of the B2C site, the [https://github.com/AzureAD/microsoft-authentication-library-for-js](MSAL library docs), the [react-adal source](https://github.com/salvoravida/react-adal) and this [React MSAL sample](https://github.com/sunilbandla/react-msal-sample). Thanks!
