@@ -1,18 +1,28 @@
 # README
 
-Azure AD B2C is a cost effective identity provider covering social and enterprise logins but it can be awekward to integrate with - its documentation is not great and it using it involves ferreting around across multiple samples (not always working or complete), the ADAL library, and the MSAL library. Fun it is not.
+Azure AD B2C is a cost effective identity provider covering social and enterprise logins but it can be awekward to integrate with - its documentation is not great and using it involves ferreting around across multiple samples, the ADAL library, and the MSAL library. Fun it is not.
 
 I've focused this package on B2C although with minor changes it could be used more broadly. MSAL itself is rather generic but B2C has some specific requirements and I think half of the problem with the documentation is that you end up drifting across B2C and straight AD. I wanted to make things simpler for B2C.
 
 Hopefully this will help people writing React apps. It makes use of MSAL underneath and the core of it (other than protecting routes) will probably work with other frameworks too but I use React at the moment. As it's an SPA my assumption in the library and documentation below is that you ultimately want to get an access token that you can use to call remote APIs. See this [Azure AD B2C post here](https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-access-tokens) for details on how to set this up on the B2C side.
 
-PRs welcome - lets make B2C easier to use!
+PRs welcome!
+
+## Installation
+
+If you are using npm:
+
+    npm install react-azure-ad-b2c --save
+
+Or if you are using yarn:
+
+    yarn add react-azure-ad-b2c
 
 ## Initializing the Library
 
 You'll first need to load the module and pass some configuration to the library. Normally this would go in your index.js file:
 
-    import authentication from './react-azure-b2c';
+    import authentication from 'react-azure-ad-b2c';
     authentication.initialize({
         // optional, will default to this
         instance: 'https://login.microsoftonline.com/tfp/', 
@@ -25,13 +35,46 @@ You'll first need to load the module and pass some configuration to the library.
         // where MSAL will store state - localStorage or sessionStorage
         cacheLocation: 'sessionStorage',
         // the scopes you want included in the access token
-        scopes: ['https://headlessforumdev.onmicrosoft.com/management/admin']
+        scopes: ['https://myb2ctenant.onmicrosoft.com/management/admin'],
+        // optional, the URI to redirect to after logout
+        postLogoutRedirectUri: 'http://myapp.com'
     });
     
 ## Authenticating When The App Starts
 
-If you want to set things up so that a user is authenticated as soon as they hit your app (for example if you've got a link to an app from a landing page) then 
+If you want to set things up so that a user is authenticated as soon as they hit your app (for example if you've got a link to an app from a landing page) then, in index.js, wrap the lines of code that launch the React app with the _authentication.run_ function:
 
+    authentication.run(() => {
+      ReactDOM.render(<App />, document.getElementById('root'));
+      registerServiceWorker();  
+    });
+
+## Triggering Authentication Based on Components Mounting (and routing)
+
+If you want to set things up so that a user is authenticated as they visit a part of the application that requires authentication then the appropriate components can be wrapped inside higher order components that will handle the authentication process. This is done using the _authentication.required_ function, normally in conjunction with a router. The example below shows this using the popular react-router:
+
+    import React, { Component } from 'react';
+    import authentication from 'react-azure-ad-b2c'
+    import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+    import HomePage from './Homepage'
+    import MembersArea from './MembersArea'
+    
+    class App extends Component {
+      render() {
+        return (
+          <Router basename={process.env.PUBLIC_URL}>
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route exact path="/membersArea" component={authentication.required(MembersArea)}>
+            </Switch>
+          </Router>
+        );
+      }
+    }
+
+## Signing Out
+
+To sign out 
 
 ## Thanks
 
