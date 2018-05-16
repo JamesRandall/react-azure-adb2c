@@ -64,7 +64,8 @@ const authentication = {
       authCallback,
       { logger: logger,
         cacheLocation: config.cacheLocation,
-        postLogoutRedirectUri: config.postLogoutRedirectUri }
+        postLogoutRedirectUri: config.postLogoutRedirectUri,
+        redirectUri: config.redirectUri }
     );
   },
   run: (launchApp) => {

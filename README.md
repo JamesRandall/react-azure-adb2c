@@ -36,6 +36,8 @@ You'll first need to load the module and pass some configuration to the library.
         cacheLocation: 'sessionStorage',
         // the scopes you want included in the access token
         scopes: ['https://myb2ctenant.onmicrosoft.com/management/admin'],
+        // optional, the redirect URI - if not specified MSAL will pick up the location from window.href
+        redirectUri: 'http://localhost:3000',
         // optional, the URI to redirect to after logout
         postLogoutRedirectUri: 'http://myapp.com'
     });
