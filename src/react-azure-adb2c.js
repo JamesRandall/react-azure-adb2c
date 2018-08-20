@@ -11,18 +11,37 @@ const state = {
   accessToken: null,
   scopes: []  
 }
+var appConfig = {
+  instance: null,
+  tenant: null,
+  signInPolicy: null,
+  resetPolicy: null,
+  applicationId: null,
+  cacheLocation: null,
+  redirectUri: null,
+  postLogoutRedirectUri: null
+};
 
 function loggerCallback(logLevel, message, piiLoggingEnabled) {
   console.log(message);
 }
 
 function authCallback(errorDesc, token, error, tokenType) {
-  if (errorDesc) {
+  if (errorDesc && errorDesc.indexOf('AADB2C90118') > -1) {
+    redirect();
+  }
+  else if (errorDesc) {
     console.log(error + ':' + errorDesc);
     state.stopLoopingRedirect = true;
   } else {
     acquireToken();
   }  
+}
+
+function redirect() {
+  const localMsalApp = window.msal;
+  localMsalApp.authority = `https://login.microsoftonline.com/tfp/${appConfig.tenant}/${appConfig.resetPolicy}`;
+  acquireToken();
 }
 
 function acquireToken(successCallback) {
@@ -46,10 +65,12 @@ function acquireToken(successCallback) {
       }
     });
   }
+  
 }
 
 const authentication = {
   initialize: (config) => {
+    appConfig = config;
     const instance = config.instance ? config.instance : 'https://login.microsoftonline.com/tfp/';
     const authority = `${instance}${config.tenant}/${config.signInPolicy}`;
     let scopes = config.scopes;

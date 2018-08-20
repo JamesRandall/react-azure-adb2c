@@ -30,6 +30,8 @@ You'll first need to load the module and pass some configuration to the library.
         tenant: 'myb2ctenant.onmicrosoft.com',
         // the policy to use to sign in, can also be a sign up or sign in policy
         signInPolicy: 'mysigninpolicy',
+        // the policy to use for password reset
+        resetPolicy: 'mypasswordresetpolicy',
         // the the B2C application you want to authenticate with (that's just a random GUID - get yours from the portal)
         applicationId: '75ee2b43-ad2c-4366-9b8f-84b7d19d776e',
         // where MSAL will store state - localStorage or sessionStorage
