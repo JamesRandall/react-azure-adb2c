@@ -19,7 +19,7 @@ declare const react_azure_adb2c: {
     default: {
         initialize (config: AuthConfig): void;
         run(launchApp: any): void;
-        required(WrappedComponent: any, renderLoading: any): (props: any) => any;
+        required(WrappedComponent: any, renderLoading?: any): (props: any) => any;
         signOut(): any;
         getAccessToken(): any;
     }
