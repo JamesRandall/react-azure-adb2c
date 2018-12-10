@@ -12,6 +12,7 @@ const state = {
   scopes: []  
 }
 var appConfig = {
+  validateAuthority: false,
   instance: null,
   tenant: null,
   signInPolicy: null,
@@ -84,6 +85,7 @@ const authentication = {
       authority,
       authCallback,
       { logger: logger,
+        validateAuthority: config.validateAuthority,
         cacheLocation: config.cacheLocation,
         postLogoutRedirectUri: config.postLogoutRedirectUri,
         redirectUri: config.redirectUri }
