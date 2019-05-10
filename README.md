@@ -25,7 +25,7 @@ You'll first need to load the module and pass some configuration to the library.
     import authentication from 'react-azure-adb2c';
     authentication.initialize({
         // optional, will default to this
-        instance: 'https://login.microsoftonline.com/tfp/', 
+        instance: 'https://login.microsoftonline.com/tfp/',
         // your B2C tenant
         tenant: 'myb2ctenant.onmicrosoft.com',
         // the policy to use to sign in, can also be a sign up or sign in policy
@@ -42,15 +42,17 @@ You'll first need to load the module and pass some configuration to the library.
         redirectUri: 'http://localhost:3000',
         // optional, the URI to redirect to after logout
         postLogoutRedirectUri: 'http://myapp.com'
+        // optional, when ValidateAuthority is set to false, redirects are allowed to b2clogin.com.
+        validateAuthority: true
     });
-    
+
 ## Authenticating When The App Starts
 
 If you want to set things up so that a user is authenticated as soon as they hit your app (for example if you've got a link to an app from a landing page) then, in index.js, wrap the lines of code that launch the React app with the _authentication.run_ function:
 
     authentication.run(() => {
       ReactDOM.render(<App />, document.getElementById('root'));
-      registerServiceWorker();  
+      registerServiceWorker();
     });
 
 ## Triggering Authentication Based on Components Mounting (and routing)
@@ -62,7 +64,7 @@ If you want to set things up so that a user is authenticated as they visit a par
     import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
     import HomePage from './Homepage'
     import MembersArea from './MembersArea'
-    
+
     class App extends Component {
       render() {
         return (
