@@ -19,7 +19,8 @@ var appConfig = {
   applicationId: null,
   cacheLocation: null,
   redirectUri: null,
-  postLogoutRedirectUri: null
+  postLogoutRedirectUri: null,
+  validateAuthority: false,
 };
 
 function loggerCallback(logLevel, message, piiLoggingEnabled) {
@@ -87,7 +88,7 @@ const authentication = {
         cacheLocation: config.cacheLocation,
         postLogoutRedirectUri: config.postLogoutRedirectUri,
         redirectUri: config.redirectUri,
-        validateAuthority: false,
+        validateAuthority: config.validateAuthority,
       }
     );
   },
