@@ -9,7 +9,7 @@ const state = {
   stopLoopingRedirect: false,
   launchApp: null,
   accessToken: null,
-  scopes: []  
+  scopes: []
 }
 var appConfig = {
   instance: null,
@@ -19,7 +19,8 @@ var appConfig = {
   applicationId: null,
   cacheLocation: null,
   redirectUri: null,
-  postLogoutRedirectUri: null
+  postLogoutRedirectUri: null,
+  validateAuthority: null,
 };
 
 function loggerCallback(logLevel, message, piiLoggingEnabled) {
@@ -35,7 +36,7 @@ function authCallback(errorDesc, token, error, tokenType) {
     state.stopLoopingRedirect = true;
   } else {
     acquireToken();
-  }  
+  }
 }
 
 function redirect() {
@@ -45,7 +46,7 @@ function redirect() {
 }
 
 function acquireToken(successCallback) {
-  const localMsalApp = window.msal; 
+  const localMsalApp = window.msal;
   const user = localMsalApp.getUser(state.scopes);
   if (!user) {
     localMsalApp.loginRedirect(state.scopes);
@@ -65,7 +66,7 @@ function acquireToken(successCallback) {
       }
     });
   }
-  
+
 }
 
 const authentication = {
@@ -73,28 +74,31 @@ const authentication = {
     appConfig = config;
     const instance = config.instance ? config.instance : 'https://login.microsoftonline.com/tfp/';
     const authority = `${instance}${config.tenant}/${config.signInPolicy}`;
+    const validateAuthority = (config.validateAuthority !== null || undefined) ? config.validateAuthority : true
     let scopes = config.scopes;
     if (!scopes || scopes.length === 0) {
       console.log('To obtain access tokens you must specify one or more scopes. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-access-tokens');
       state.stopLoopingRedirect = true;
-    }  
+    }
     state.scopes = scopes;
-    
+
     new Msal.UserAgentApplication(config.applicationId,
       authority,
       authCallback,
       { logger: logger,
         cacheLocation: config.cacheLocation,
         postLogoutRedirectUri: config.postLogoutRedirectUri,
-        redirectUri: config.redirectUri }
+        redirectUri: config.redirectUri,
+        validateAuthority: validateAuthority,
+      }
     );
   },
   run: (launchApp) => {
-    state.launchApp = launchApp; 
+    state.launchApp = launchApp;
     if (!window.msal.isCallback(window.location.hash) && window.parent === window && !window.opener) {
       if (!state.stopLoopingRedirect) {
         acquireToken();
-      }    
+      }
     }
   },
   required: (WrappedComponent, renderLoading) =>  {
@@ -112,7 +116,7 @@ const authentication = {
           this.setState({
             signedIn: true
           });
-        });        
+        });
       }
 
       render() {
