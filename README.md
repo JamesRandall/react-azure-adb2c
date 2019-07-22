@@ -1,6 +1,6 @@
 # README
 
-Azure AD B2C is a cost effective identity provider covering social and enterprise logins but it can be awekward to integrate with - its documentation is currently not great and using it involves rooting around across multiple samples, the ADAL library, and the MSAL library.
+Azure AD B2C is a cost effective identity provider covering social and enterprise logins but it can be awkward to integrate with - its documentation is currently not great and using it involves rooting around across multiple samples, the ADAL library, and the MSAL library.
 
 That being the case I've focused this package on B2C although with minor changes it could be used more broadly. MSAL itself, which this library wraps, is rather generic but B2C has some specific requirements and I think half of the problem with the documentation is that you end up drifting across B2C and straight AD. I wanted to make things simpler for B2C.
 
