@@ -73,6 +73,7 @@ const authentication = {
     appConfig = config;
     const instance = config.instance ? config.instance : 'https://login.microsoftonline.com/tfp/';
     const authority = `${instance}${config.tenant}/${config.signInPolicy}`;
+    var validateAuthority = instance.indexOf('b2clogin.com') === -1;
     let scopes = config.scopes;
     if (!scopes || scopes.length === 0) {
       console.log('To obtain access tokens you must specify one or more scopes. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-access-tokens');
@@ -86,7 +87,8 @@ const authentication = {
       { logger: logger,
         cacheLocation: config.cacheLocation,
         postLogoutRedirectUri: config.postLogoutRedirectUri,
-        redirectUri: config.redirectUri }
+        redirectUri: config.redirectUri,
+        validateAuthority: validateAuthority }
     );
   },
   run: (launchApp) => {
