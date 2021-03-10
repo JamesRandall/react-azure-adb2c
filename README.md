@@ -69,7 +69,7 @@ If you want to set things up so that a user is authenticated as they visit a par
           <Router basename={process.env.PUBLIC_URL}>
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route exact path="/membersArea" component={authentication.required(MembersArea)}>
+              <Route exact path="/membersArea" component={authentication.required(MembersArea)} />
             </Switch>
           </Router>
         );
